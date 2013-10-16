@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.version     = '1.1.2'
   s.summary     = 'Add and manage labels '
   # s.description = 'TODO: Add (optional) gem description here'
-  s.required_ruby_version = '>= 1.8.7'
+  s.required_ruby_version = '>= 1.9.3'
 
   s.author    = 'Victor Martin'
   s.email     = 'victor.martin84@gmail.com'
@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 1.1.2'
+  s.add_dependency 'spree_core', '~> 1.2.4'
 
   s.add_development_dependency 'capybara', '1.0.1'
   s.add_development_dependency 'factory_girl', '~> 2.6.4'
