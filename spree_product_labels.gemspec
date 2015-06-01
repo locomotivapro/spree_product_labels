@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_product_labels'
-  s.version     = '1.1.2'
+  s.version     = '3.0.0'
   s.summary     = 'Add and manage labels '
   # s.description = 'TODO: Add (optional) gem description here'
   s.required_ruby_version = '>= 1.8.7'
