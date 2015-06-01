@@ -12,13 +12,6 @@ $.fn.searchProductLabels = function (options) {
   this.select2({
     minimumInputLength: 3,
     multiple: multiple,
-    // initSelection: function (element, callback) {
-    //   $.get(Spree.routes.available_admin_product_labels_url(this.data('product-id')), {
-    //     ids: element.val().split(','),
-    //   }, function (data) {
-    //     callback(multiple ? data.products : data.products[0]);
-    //   });
-    // },
     ajax: {
       url: Spree.routes.available_admin_product_labels_url(this.data('product-id')),
       datatype: 'json',

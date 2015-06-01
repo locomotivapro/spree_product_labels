@@ -17,5 +17,8 @@ module Spree
                 ['dark_purple', '#623645'],
                 ['vineyard',     '#7FAF1B']
               ]
+
+    scope :shape, ->(shape) { where(shape: shape) }
+
   end
 end
