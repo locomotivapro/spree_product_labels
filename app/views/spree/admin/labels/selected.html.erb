@@ -1,42 +1,15 @@
-<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+<%= render :partial => 'spree/admin/shared/sub_menu/product' %>
 
 <%= render :partial => 'spree/admin/shared/product_tabs', :locals => { :current => 'Labels' } %>
 <div id="selected-labels" data-hook>
 	<%= render :partial => 'label_table', :locals => { :labels => @labels } %>
 </div>
 
-<%= form_tag '#' do %>
-	<%= label_tag nil, t(:search) %>:
-	<input id="searchtext" size="25">
+<h3><%= Spree.t(:add) %></h3>
+<%= form_tag spree.apply_admin_product_labels_path(@product) do %>
+	<div class="form-group">
+		<%= label_tag "product[labels_ids]", t(:search) %>
+		<%= hidden_field_tag "product[labels_ids]", '', class: "", multiple: 'multiple', data: { product_id: @product.to_param, select_2: 'product_labels' } %>
+	</div>
+	<%= button Spree.t(:add), 'ok-sign', :submit, class: "btn-success" %>
 <% end %>
-
-<%= javascript_tag do %>
-	function search_for_labels(){
-		$.ajax({
-		 data: {q: $("#searchtext").val() },
-		 dataType: 'html',
-		 success: function(request){
-			 jQuery('#search_hits').html(request);
-		 },
-		 type: 'POST',
-		 url: '<%= available_admin_product_labels_url(@product, :format => 'js') %>'
-		});
-	}
-
-	$("#searchtext").keypress(function (e) {
-		if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
-			search_for_labels();
-
-			return false;
-		} else {
-			 return true;
-		}
-	});
-
-	$("#searchtext").delayedObserver(function() {
-		search_for_labels();
-	}, 0.75);
-<% end %>
-
-<br />
-<div id="search_hits" data-hook></div>

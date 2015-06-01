@@ -1,6 +1,8 @@
-<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+<%= render :partial => 'spree/admin/shared/sub_menu/product' %>
 
-<h1><%= t(:editing_label) %></h1>
+<% content_for :page_title do %>
+  <%= t(:editing_label) %>
+<% end %>
 
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @label } %>
 

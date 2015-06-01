@@ -9,7 +9,8 @@ Spree::Core::Engine.routes.draw do
 				end
 				collection do
 	        get  :selected
-	        post :available
+	        get :available
+          post :apply
 	      end
 	  	end
 		end

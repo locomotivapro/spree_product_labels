@@ -1,38 +1,40 @@
-<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
-
-<div class="toolbar" data-hook="toolbar">
-  <ul class="actions">
-    <li id="new_label_link">
-      <%= button_link_to t(:new_label), new_admin_label_url, {:remote => true, :icon => 'add', 'data-update' => 'new_label', :id => 'new_label_link'} %>
-    </li>
-  </ul>
-  <br class="clear" />
-</div>
-
-<h1><%= t(:listing_labels) %></h1>
+<%= render :partial => 'spree/admin/shared/sub_menu/product' %>
+  <% content_for :page_actions do %>
+    <%= button_link_to t(:new_label), spree.new_admin_label_url, {:remote => true, :icon => 'add', 'data-update' => 'new_label', :id => 'new_label_link'} %>
+  <% end %>
+<% content_for :page_title do %>
+  <%= Spree::ProductLabel.model_name.human(count: :many)  %>
+<% end %>
 
 <div id="new_label"></div>
 
 <%= image_tag 'spinner.gif', :plugin => 'spree', :style => 'display:none;', :id => 'busy_indicator' %>
 
-<table class="index">
-  <thead>
-    <tr data-hook="reports_header">
-      <th><%= t(:title) %></th>
-      <th><%= t(:shape) %></th>
-      <th data-hook="admin_labels_index_header_actions"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @labels.each do |label| %>
-	    <tr data-hook="reports_row">
-	      <td><%= label.title %></td>
-	      <td><span class="<%= label.shape %>" style="background-color:<%=label.color%>"></span></td>
-	      <td data-hook="admin_users_index_row_actions">
-          <%= link_to_edit label, :class => 'edit' %> &nbsp;
-          <%= link_to_delete label %>
-        </td>
-	    </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if @labels.any? %>
+  <table class="table" id="listing_labels">
+    <thead>
+      <tr data-hook="reports_header">
+        <th><%= t(:title) %></th>
+        <th><%= t(:shape) %></th>
+        <th data-hook="admin_labels_index_header_actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @labels.each do |label| %>
+  	    <tr data-hook="reports_row">
+  	      <td><%= label.title %></td>
+  	      <td><span class="label <%= label.shape %>" style="background-color:<%=label.color%>"><%= label.shape %></span></td>
+  	      <td data-hook="admin_users_index_row_actions">
+            <%= link_to_edit label, :class => 'edit' %> &nbsp;
+            <%= link_to_delete label %>
+          </td>
+  	    </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-warning no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: Spree::RelationType.model_name.human(count: :many)) %>,
+    <%= link_to Spree.t(:add_one), spree.new_admin_label_url %>!
+  </div>
+<% end %>

@@ -1,4 +1,4 @@
-<table class="index">
+<table class="table">
   <thead>
     <tr data-hook="labels_header">
       <th><%= t(:name) %></th>
@@ -10,11 +10,9 @@
     <% labels.each do |label| %>
       <tr id="<%= dom_id(label) %>" data-hook="labels_row">
         <td><%= label.title %></td>
-        <td><span class="<%= label.shape %>" style="background-color:<%=label.color%>"></span></td>
+        <td><span class="label" style="background-color:<%=label.color%>"><%= label.shape %></span></td>
         <td class="actions">
-          <%= link_to_delete label,
-                            :url => remove_admin_product_label_url(@product, label),
-                            :name => icon('delete') + ' ' + t(:remove) %>
+          <%= @product ? link_to_with_icon('remove', Spree.t(:delete), remove_admin_product_label_path(@product, label), class: "btn btn-danger btn-sm", method: :delete ) : link_to_delete(label) %>
         </td>
       </tr>
     <% end %>
